@@ -1,0 +1,19 @@
+name: Run Python Script
+
+on:
+  schedule:
+    - cron: "0 * * * *"  # Uruchamianie co godzinę
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - name: Install dependencies
+        run: pip install pandas selenium webdriver-manager requests pydrive
+      - name: Run script
+        run: python script.py
