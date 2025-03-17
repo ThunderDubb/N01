@@ -24,6 +24,9 @@ jobs:
     - name: Run scraper
       run: python scraper.py
 
+    - name: List files in directory
+      run: ls -la
+
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
