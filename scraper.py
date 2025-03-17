@@ -3,11 +3,8 @@ from selenium.webdriver.chrome.service import Service
 import time
 import json
 
-# Ścieżka do ChromeDriver
-chrome_driver_path = 'chromedriver.exe'
-
 # Konfiguracja usługi ChromeDriver
-service = Service(executable_path=chrome_driver_path)
+service = Service(executable_path='/usr/local/bin/chromedriver')
 
 # Konfiguracja przeglądarki
 driver = webdriver.Chrome(service=service)
@@ -28,7 +25,7 @@ response = driver.page_source
 data = json.loads(response)
 
 # Zapisz dane JSON do pliku
-with open('matches.json', 'w') as json_file, open('matches.json', 'w') as json_file:
+with open('matches.json', 'w') as json_file:
     json.dump(data, json_file, indent=4)
 
 driver.quit()
