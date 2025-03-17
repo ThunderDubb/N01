@@ -9,7 +9,7 @@ import os
 
 # 1️⃣ Ustawienia Selenium
 options = webdriver.ChromeOptions()
-options.add_argument("--headless")  # Tryb bez interfejsu
+options.add_argument("--headless")  # Tryb bez interfejsus
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
 # 2️⃣ Otwórz stronę główną i pobierz SID
