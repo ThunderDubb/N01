@@ -19,17 +19,16 @@ main_url = "https://n01darts.com/n01/league/n01_view.html?tmid=t_KcSD_1414_rr_0_
 driver.get(main_url)
 time.sleep(3)
 
-# logs = driver.get_log("performance")
-
-
-sid_url = None
-for log in logs:
-    message = log["message"]
-    if "match_view&sid=" in message:
-        sid_url = message.split("https://tk2-228-23746.vs.sakura.ne.jp")[1].split('"')[0]
-        sid_url = "https://tk2-228-23746.vs.sakura.ne.jp" + sid_url
-        break
-
+# Zbieranie logów typu "browser"
+try:
+    logs = driver.get_log("browser")  # Próba pobrania logów przeglądarki
+    if logs:  # Sprawdzamy, czy logi są dostępne
+        for log in logs:
+            print(log)  # Wydrukowanie logów
+    else:
+        print("Brak dostępnych logów.")
+except Exception as e:
+    print(f"Błąd przy zbieraniu logów: {e}")
 driver.quit()
 
 # 3️⃣ Pobieranie JSON
