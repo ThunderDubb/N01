@@ -2,7 +2,7 @@ name: Run Python Script
 
 on:
   schedule:
-    - cron: "*/5 * * * *"  # Uruchamianie co 5 minut
+   # - cron: "*/5 * * * *"  # Uruchamianie co 5 minut
   push:
     branches:
       - main  # Uruchomienie po pushu na main
