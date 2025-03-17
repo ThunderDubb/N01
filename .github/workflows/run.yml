@@ -1,28 +1,25 @@
-name: Run Python Script
+name: Schedule_Scrapper
 
-on:
-  schedule:
-   # - cron: "*/5 * * * *"  # Uruchamianie co 5 minut
-  push:
-    branches:
-      - main  # Uruchomienie po pushu na main
+on: [push]
 
 jobs:
-  run-script:
+  build:
+
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2  # Krok 1: Pobieranie repozytorium
-      - name: Setup Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.9'  # Krok 2: Ustawienie wersji Pythona
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt  # Krok 3: Instalowanie zależności
-      - name: Install Chrome
-        run: |
-          sudo apt update
-          sudo apt install -y google-chrome-stable  # Krok 4: Instalowanie Chrome
-      - name: Run script
-        run: python script.py  # Krok 5: Uruchomienie skryptu
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install selenium
+
+    - name: Run scraper
+      run: python scraper.py
