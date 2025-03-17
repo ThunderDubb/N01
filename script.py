@@ -9,8 +9,11 @@ import os
 
 # 1️⃣ Ustawienia Selenium
 options = webdriver.ChromeOptions()
-options.add_argument("--headless")  # Tryb bez interfejsus
+options.add_argument("--headless")  # Tryb bez interfejsu
+options.add_argument("--no-sandbox")  # Potrzebne na GitHub Actions
+options.add_argument("--disable-dev-shm-usage")  # Unika błędów pamięci
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+
 
 # 2️⃣ Otwórz stronę główną i pobierz SID
 main_url = "https://n01darts.com/n01/league/n01_view.html?tmid=t_KcSD_1414_rr_0_bQoQ_gcqN"
