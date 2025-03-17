@@ -1,32 +1,30 @@
 name: Run Python Script
 
-- name: Install Chrome
-  run: |
-    sudo apt update
-    sudo apt install -y google-chrome-stable
-
-- name: Install ChromeDriver
-  run: |
-    CHROME_VERSION=$(google-chrome --version | awk '{print $3}')
-    sudo apt install -y chromedriver
-
 on:
+  schedule:
+    - cron: "*/5 * * * *"  # Uruchamianie co 5 minut
   push:
     branches:
-      - main
-  schedule:
-    - cron: "*/5 * * * *"  # Uruchamianie co godzinę
+      - main  # Uruchomienie po pushu na main
 
 jobs:
   run-script:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2  # Krok 1: Pobieranie repozytorium
       - name: Setup Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.9'
+          python-version: '3.9'  # Krok 2: Ustawienie wersji Pythona
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: pip install -r requirements.txt  # Krok 3: Instalowanie zależności
+      - name: Install Chrome
+        run: |
+          sudo apt update
+          sudo apt install -y google-chrome-stable  # Krok 4: Instalowanie Chrome
+      - name: Install ChromeDriver
+        run: |
+          CHROME_VERSION=$(google-chrome --version | awk '{print $3}')
+          sudo apt install -y chromedriver  # Krok 5: Instalowanie ChromeDriver
       - name: Run script
-        run: python script.py
+        run: python script.py  # Krok 6: Uruchomienie skryptu
