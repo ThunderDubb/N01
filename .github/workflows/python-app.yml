@@ -21,5 +21,14 @@ jobs:
         python -m pip install --upgrade pip
         pip install selenium
 
+    - name: Download ChromeDriver
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y wget unzip
+        wget https://chromedriver.storage.googleapis.com/134.0.6998.35/chromedriver_linux64.zip
+        unzip chromedriver_linux64.zip
+        sudo mv chromedriver /usr/local/bin/
+        sudo chmod +x /usr/local/bin/chromedriver
+
     - name: Run scraper
       run: python scraper.py
