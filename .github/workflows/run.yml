@@ -20,3 +20,5 @@ jobs:
         run: pip install pandas selenium webdriver-manager requests pydrive
       - name: Run script
         run: python script.py
+      - name: Install dependencies
+        run: pip install -r requirements.txt
