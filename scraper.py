@@ -1,13 +1,20 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 import time
 import json
+
+# Konfiguracja opcji Chrome
+chrome_options = Options()
+chrome_options.add_argument('--headless')
+chrome_options.add_argument('--no-sandbox')
+chrome_options.add_argument('--disable-dev-shm-usage')
 
 # Konfiguracja usługi ChromeDriver
 service = Service(executable_path='/usr/local/bin/chromedriver')
 
 # Konfiguracja przeglądarki
-driver = webdriver.Chrome(service=service)
+driver = webdriver.Chrome(service=service, options=chrome_options)
 
 # Przejdź do strony meczu
 driver.get('https://n01darts.com/n01/league/n01_view.html?tmid=t_KcSD_1414_rr_0_bQoQ_gcqN')
