@@ -1,12 +1,16 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 import time
 import json
 
 # Ścieżka do ChromeDriver
-chrome_driver_path = 'ścieżka/do/chromedriver'
+chrome_driver_path = 'chromedriver.exe'
+
+# Konfiguracja usługi ChromeDriver
+service = Service(executable_path=chrome_driver_path)
 
 # Konfiguracja przeglądarki
-driver = webdriver.Chrome(executable_path=chrome_driver_path)
+driver = webdriver.Chrome(service=service)
 
 # Przejdź do strony meczu
 driver.get('https://n01darts.com/n01/league/n01_view.html?tmid=t_KcSD_1414_rr_0_bQoQ_gcqN')
@@ -24,7 +28,7 @@ response = driver.page_source
 data = json.loads(response)
 
 # Zapisz dane JSON do pliku
-with open('matches.json', 'w') as json_file:
+with open('matches.json', 'w') as json_file, open('matches.json', 'w') as json_file:
     json.dump(data, json_file, indent=4)
 
 driver.quit()
