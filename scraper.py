@@ -10,8 +10,11 @@ chrome_options.add_argument('--headless')
 chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
 
-# Konfiguracja przeglądarki z użyciem Selenium Manager
-driver = webdriver.Chrome(options=chrome_options)
+# Konfiguracja usługi ChromeDriver
+service = Service(executable_path='/usr/local/bin/chromedriver')
+
+# Konfiguracja przeglądarki
+driver = webdriver.Chrome(service=service, options=chrome_options)
 
 # Przejdź do strony meczu
 driver.get('https://n01darts.com/n01/league/n01_view.html?tmid=t_KcSD_1414_rr_0_bQoQ_gcqN')
@@ -26,11 +29,19 @@ time.sleep(5)
 
 # Pobierz dane JSON
 response = driver.page_source
-data = json.loads(response)
 
-# Zapisz dane JSON do pliku
-with open('matches.json', 'w') as json_file:
-    json.dump(data, json_file, indent=4)
+# Zapisz odpowiedź do pliku tekstowego
+with open('response.txt', 'w') as text_file:
+    text_file.write(response)
+
+# Spróbuj zdekodować dane JSON
+try:
+    data = json.loads(response)
+    # Zapisz dane JSON do pliku
+    with open('matches.json', 'w') as json_file:
+        json.dump(data, json_file, indent=4)
+    print("Dane zostały zapisane do pliku matches.json")
+except json.JSONDecodeError:
+    print("Błąd dekodowania JSON: Odpowiedź nie jest poprawnym JSON")
 
 driver.quit()
-print("Dane zostały zapisane do pliku matches.json")
