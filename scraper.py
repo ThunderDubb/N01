@@ -10,11 +10,8 @@ chrome_options.add_argument('--headless')
 chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
 
-# Konfiguracja usługi ChromeDriver
-service = Service(executable_path='/usr/local/bin/chromedriver')
-
-# Konfiguracja przeglądarki
-driver = webdriver.Chrome(service=service, options=chrome_options)
+# Konfiguracja przeglądarki z użyciem Selenium Manager
+driver = webdriver.Chrome(options=chrome_options)
 
 # Przejdź do strony meczu
 driver.get('https://n01darts.com/n01/league/n01_view.html?tmid=t_KcSD_1414_rr_0_bQoQ_gcqN')
