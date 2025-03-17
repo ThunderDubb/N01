@@ -11,8 +11,6 @@ options = webdriver.ChromeOptions()
 options.add_argument("--headless")  # Tryb bez interfejsu
 options.add_argument("--no-sandbox")  # Potrzebne na GitHub Actions
 options.add_argument("--disable-dev-shm-usage")  # Unika błędów pamięci
-options.add_argument("--enable-logging")  # Włącza logowanie
-options.add_argument("--v=1")  # Ustawienie poziomu szczegółowości logów
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
 
@@ -21,9 +19,8 @@ main_url = "https://n01darts.com/n01/league/n01_view.html?tmid=t_KcSD_1414_rr_0_
 driver.get(main_url)
 time.sleep(3)
 
-logs = driver.get_log("performance")
-for log in logs:
-    print(log)
+# logs = driver.get_log("performance")
+
 
 sid_url = None
 for log in logs:
