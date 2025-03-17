@@ -1,5 +1,15 @@
 name: Run Python Script
 
+- name: Install Chrome
+  run: |
+    sudo apt update
+    sudo apt install -y google-chrome-stable
+
+- name: Install ChromeDriver
+  run: |
+    CHROME_VERSION=$(google-chrome --version | awk '{print $3}')
+    sudo apt install -y chromedriver
+
 on:
   push:
     branches:
